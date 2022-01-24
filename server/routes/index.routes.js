@@ -1,8 +1,7 @@
 import { Router } from 'express';
-import galleryRouter from './gallery.route';
-
+import imageRouter from './gallery.route';
 const indexRouter = Router();
 
-indexRouter.use(galleryRouter);
+indexRouter.use(imageRouter);
 
 export default indexRouter;

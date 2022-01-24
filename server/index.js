@@ -1,6 +1,7 @@
 import express from 'express';
 import indexRouter from './routes/index.routes';
 import fileUpload from 'express-fileupload';
+import config from './config';
 
 const app = express();
 

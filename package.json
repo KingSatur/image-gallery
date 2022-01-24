@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "aws-sdk": "^2.1062.0",
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
     "express-fileupload": "^1.2.1",
@@ -26,7 +27,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
-    "server:dev":"nodemon server/index.js --exec babel-node --ignore src"
+    "server:dev": "nodemon server/index.js --exec babel-node --ignore src"
   },
   "overrides": {
     "mini-css-extract-plugin": "2.4.5"
