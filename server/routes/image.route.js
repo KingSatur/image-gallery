@@ -5,7 +5,7 @@ const imageRouter = Router();
 
 imageRouter.get('/images/', getImages);
 imageRouter.post('/images/upload', uploadImage);
-imageRouter.post('/images/:id', getImageById);
+imageRouter.get('/images/:id', getImageById);
 imageRouter.delete('/images/:id', deleteImageById);
 
 export default imageRouter;

@@ -1,4 +1,4 @@
-import { Schema, Model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const ImageWrapperSchema = new Schema(
   {
@@ -11,9 +11,9 @@ const ImageWrapperSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: false,
     collection: 'ImageWrapper',
+    versionKey: false,
   }
 );
 
-export default new Model('ImageWrapperSchema', ImageWrapperSchema);
+export const ImageWrapperModel = new model('ImageWrapper', ImageWrapperSchema);
