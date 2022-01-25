@@ -23,7 +23,7 @@ export const uploadImage = async function (req = express.request, res = express.
         Key: key,
       })
       .promise();
-    const image_url = `https://${config.bucket_name}.${config.endpoint}/${image.name}`;
+    const image_url = `https://${config.bucket_name}.${config.endpoint}/${key}`;
     const imageWrapper = await new ImageWrapperModel({
       title,
       key,
@@ -47,12 +47,13 @@ export const getImageById = async function (req = express.request, res = express
 };
 export const deleteImageById = async function (req = express.request, res = express.response) {
   const { id } = req.params;
-  const deleteImaged = await ImageWrapperModel.findByIdAndDelete(id);
+  const deleteImage = await ImageWrapperModel.findByIdAndDelete(id);
+  console.log(deleteImage);
   await s3Bucket
     .deleteObject({
       Bucket: config.bucket_name,
-      Key: deleteImaged.key,
+      Key: deleteImage.key,
     })
     .promise();
-  return res.json(deleteImaged);
+  return res.json(deleteImage);
 };

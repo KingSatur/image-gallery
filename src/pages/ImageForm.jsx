@@ -1,18 +1,42 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const ImageForm = () => {
+  const navigate = useNavigate();
   const [file, setFile] = useState();
   const [title, setTitle] = useState('');
+  const [loadedProgress, setLoadedProgress] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = function (e) {
+  const handleSubmit = async function (e) {
     e.preventDefault();
     const formData = new FormData();
     formData.append('image', file);
     formData.append('title', title);
+    setLoading(true);
+    await axios.post('/api/images/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      onUploadProgress(progressEvent) {
+        const { total, loaded } = progressEvent;
+        const loadedPercentage = parseInt((loaded * 100) / total);
+        setLoadedProgress(loadedPercentage);
+      },
+    });
+    setLoading(false);
+    navigate(`/image-gallery/`);
   };
 
   return (
-    <div className="col-md-4 offset-md-4">
+    <div className="col-md-4 offset-md-4 ">
+      {loading && (
+        <div className="progress rounded-0">
+          <div className="progress-bar bg-primary" role="progressbar" style={{ width: `${loadedProgress}%` }}></div>
+        </div>
+      )}
+
       <div className="card bg-dark text-light rounded-0 p-4">
         <div className="card-body">
           <h3>Upload an Image</h3>
